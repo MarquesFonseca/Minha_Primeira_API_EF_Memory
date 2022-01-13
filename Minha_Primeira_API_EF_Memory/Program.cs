@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace testeef
+namespace Minha_Primeira_API_EF_Memory
 {
     public class Program
     {

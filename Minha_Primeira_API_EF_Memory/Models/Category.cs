@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace testeef.Models
+namespace Minha_Primeira_API_EF_Memory.Models
 {
     public class Category
     {

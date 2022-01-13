@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using testeef.Data;
-using testeef.Models;
+using Minha_Primeira_API_EF_Memory.Data;
+using Minha_Primeira_API_EF_Memory.Models;
 
-namespace testeef.Controllers
+namespace Minha_Primeira_API_EF_Memory.Controllers
 {
     [ApiController] //definindo para a classe Contoller, que usaremos o ApiController
     [Route("categorias")] //Como não definimos nenhuma rota no endPoints(Startup.cs), o mapeamento das rotas serão pela rotas do controller atual

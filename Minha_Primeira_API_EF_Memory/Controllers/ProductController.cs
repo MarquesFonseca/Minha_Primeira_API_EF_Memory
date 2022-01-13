@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using testeef.Data;
-using testeef.Models;
+using Minha_Primeira_API_EF_Memory.Data;
+using Minha_Primeira_API_EF_Memory.Models;
 
-namespace testeef.Controllers
+namespace Minha_Primeira_API_EF_Memory.Controllers
 {
     [ApiController]
     [Route("produtos")]
@@ -39,6 +39,12 @@ namespace testeef.Controllers
             return produto;
         }
 
+        /// <summary>
+        /// Retorna todos os produtos de uma Categoria específica
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="id"></param>
+        /// <returns>Retorna uma lista de produtos de uma mesma categoria.</returns>
         [HttpGet]
         [Route("categorias/{id:int}")]
         public async Task<ActionResult<List<Product>>> GetByCategory([FromServices] DataContext context, int id)
@@ -51,23 +57,35 @@ namespace testeef.Controllers
             return produtos;
         }
 
+        /// <summary>
+        /// Insere um novo Produto
+        /// </summary>
+        /// <param name="context"></param>
+        /// <param name="model"></param>
+        /// <returns>Retorna o produto recém inserido.</returns>
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<Product>> Post(
         [FromServices] DataContext context,
         [FromBody] Product model)
         {
-            if (ModelState.IsValid)
+            bool existeACategoriaInformada = await context.Categories.AnyAsync(x => x.Id == model.CategoryId);
+            if (existeACategoriaInformada)//vai inserir um novo produto se existir a categoria informada.
             {
-                context.Products.Add(model);
-                await context.SaveChangesAsync();
-                //model.Category = GetCategoryById(context.Categories, model.CategoryId);
-                return model;
+                if (ModelState.IsValid)
+                {
+                    context.Products.Add(model);
+                    await context.SaveChangesAsync();
+                    var categoria = await context.Categories.FindAsync(model.Id);
+                    model.Category = categoria;
+                    return model;
+                }
+                else
+                {
+                    return BadRequest(ModelState);
+                }
             }
-            else
-            {
-                return BadRequest(ModelState);
-            }
+            return BadRequest(ModelState);
         }
     }
 }

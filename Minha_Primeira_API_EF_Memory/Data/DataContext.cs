@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using testeef.Models;
+using Minha_Primeira_API_EF_Memory.Models;
 
-namespace testeef.Data
+namespace Minha_Primeira_API_EF_Memory.Data
 {
     /// <summary>
     /// Classe DataContext (Representação do nosso banco de dados, que usaremos o banco em memória.)
