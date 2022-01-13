@@ -35,6 +35,12 @@ namespace testeef.Controllers
             return categories;
         }
 
+        /// <summary>
+        /// Retorna uma Lista de Categorias em ordem Decrescente.
+        /// É um método privado, usado internamente.
+        /// </summary>
+        /// <param name="dataContext">Acessar os dados. o "[FromServices]" indica que vai utilizar o DataContext que já está em memória</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("")]
         private async Task<ActionResult<List<Category>>> GetOrderByDesc([FromServices] DataContext dataContext)
@@ -43,6 +49,12 @@ namespace testeef.Controllers
             return categories;
         }
 
+        /// <summary>
+        /// Retorna uma Categoria informando o Id da categoria desejada
+        /// </summary>
+        /// <param name="context">Acessar os dados. o "[FromServices]" indica que vai utilizar o DataContext que já está em memória</param>
+        /// <param name="id">Informe o Id da categoria desejado</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<Category>> GetById([FromServices] DataContext context, int id)
