@@ -22,10 +22,21 @@ namespace testeef
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Informar para nossa aplicação que temos um DataContext, 
+        /// e que vamos trabalhar com o Entity Framework,
+        /// e que usaremos o nosso banco de dados em Memória.
+        /// Estamos dando o nome para o nosso banco de dados de "DataBasw"
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("DataBase"));
+            
+            //Deixar no DataContext disponível através do "addScoped", que é injeção de dependência do .net Core.
+            //Significa que, se em algum lugar da nossa aplicação solicitar o DataContext e vai deixar em memória, 
+            //onde não cria uma nova versão toda vez que requisitar, ou seja, não vai abrir uma nova conexão no banco.
+            //e assim que a requisição terminar, a aplicação vai destruir o DataContext, para não deixar vestígios na memória, liberando recurso 
             services.AddScoped<DataContext, DataContext>();
             services.AddControllers();
             //services.AddRazorPages();

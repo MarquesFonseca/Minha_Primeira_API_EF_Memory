@@ -12,6 +12,11 @@ namespace testeef.Controllers
     [Route("produtos")]
     public class ProductController : Controller
     {
+        /// <summary>
+        /// Retorna todos os produtos
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns>Produtos</returns>
         [HttpGet]
         [Route("")]
         public async Task<ActionResult<List<Product>>> Get([FromServices] DataContext context)

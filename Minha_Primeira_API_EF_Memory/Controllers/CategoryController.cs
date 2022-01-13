@@ -43,18 +43,18 @@ namespace testeef.Controllers
             return categoria;
         }
 
-        //[HttpGet]
-        //[Route("{id:int}")]
-        //private async Task<ActionResult<bool>> VerificaSeExiste([FromServices] DataContext context, int id)
-        //{
-        //    bool existe = await context.Categories.AnyAsync(x => x.Id == id);
-        //    return existe;
-        //}
+        [HttpGet]
+        [Route("{id:int}")]
+        private async Task<ActionResult<bool>> VerificaSeExiste([FromServices] DataContext context, int id)
+        {
+            bool existe = await context.Categories.AnyAsync(x => x.Id == id);
+            return existe;
+        }
 
-        //retorna o ultimo inserido
+        ////retorna o último inserido
         //[HttpPost]
         //[Route("")]
-        //public async Task<ActionResult<Category>> Post(
+        //public async Task<ActionResult<Category>> PostRetornaUltimo(
         //    [FromServices] DataContext context,
         //    [FromBody] Category model)
         //{
@@ -64,7 +64,7 @@ namespace testeef.Controllers
         //        //model.Id = g.ToString();
         //        context.Categories.Add(model);
         //        await context.SaveChangesAsync();
-        //        return model; 
+        //        return model;
         //    }
         //    else
         //    {
@@ -72,7 +72,7 @@ namespace testeef.Controllers
         //    }
         //}
 
-        //retorna uma lista de todos.
+        //retorna uma lista de todos em ordem decrescente.
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<List<Category>>> Post([FromServices] DataContext context, [FromBody] Category model)
@@ -91,9 +91,6 @@ namespace testeef.Controllers
             }
         }
 
-        //[HttpPut]
-        //[Route("alterar/{id:int}")]
-
         [HttpPut("{id}")]
         [Route("alterar/{id:int}")]
         public async Task<ActionResult<Category>> Alterar([FromServices] DataContext context, [FromBody] Category model, int id)
@@ -108,12 +105,6 @@ namespace testeef.Controllers
             {
                 return NotFound();
             }
-            //var categoria = await context.Categories.FindAsync(id);
-            //if (categoria == null)
-            //{
-            //    //return BadRequest();
-            //    return NotFound();
-            //}
 
             try
             {
