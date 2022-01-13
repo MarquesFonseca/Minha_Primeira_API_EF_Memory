@@ -63,6 +63,12 @@ namespace testeef.Controllers
             return categoria;
         }
 
+        /// <summary>
+        /// Verifica se o Id da Categoria existe na base de dados.
+        /// </summary>
+        /// <param name="context">Acessar os dados. o "[FromServices]" indica que vai utilizar o DataContext que já está em memória</param>
+        /// <param name="id">Informe o Id da Categoria desejado.</param>
+        /// <returns></returns>
         [HttpGet]
         [Route("{id:int}")]
         private async Task<ActionResult<bool>> VerificaSeExiste([FromServices] DataContext context, int id)
