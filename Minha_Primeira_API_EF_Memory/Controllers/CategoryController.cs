@@ -8,7 +8,7 @@ using testeef.Models;
 
 namespace testeef.Controllers
 {
-    [ApiController] //definindo que usaremos o ApiController
+    [ApiController] //definindo para a classe Contoller, que usaremos o ApiController
     [Route("categorias")] //Como não definimos nenhuma rota no endPoints(Startup.cs), o mapeamento das rotas serão pela rotas do controller atual
     public class CategoryController : ControllerBase
     {
@@ -19,8 +19,8 @@ namespace testeef.Controllers
         //    _dataContext = dataContext;
         //}
 
-        [HttpGet]
-        [Route("")]
+        [HttpGet]//definindo o verbo utilizado. Se não colocar nada, por padrão ele assume o GET
+        [Route("")]//rota vazia, ou seja, será a mesma rota definida no controller
         public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext dataContext)
         {
             var categories = await dataContext.Categories.AsNoTracking().ToListAsync();
