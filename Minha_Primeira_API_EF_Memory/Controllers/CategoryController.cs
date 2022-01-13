@@ -26,7 +26,7 @@ namespace testeef.Controllers
         /// Retorna uma lista de Categorias, usando o Task de forma assíncrona. 
         /// </summary>
         /// <param name="dataContext">Acessar os dados. o "[FromServices]" indica que vai utilizar o DataContext que já está em memória</param>
-        /// <returns></returns>
+        /// <returns>Retorna uma lista de Categorias</returns>
         [HttpGet]//definindo o verbo utilizado. Se não colocar nada, por padrão ele assume o GET
         [Route("")]//rota vazia, ou seja, será a mesma rota definida no controller
         public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext dataContext)
@@ -40,7 +40,7 @@ namespace testeef.Controllers
         /// É um método privado, usado internamente.
         /// </summary>
         /// <param name="dataContext">Acessar os dados. o "[FromServices]" indica que vai utilizar o DataContext que já está em memória</param>
-        /// <returns></returns>
+        /// <returns>Retorna uma lista de Categorias em ordem Descrescente</returns>
         [HttpGet]
         [Route("")]
         private async Task<ActionResult<List<Category>>> GetOrderByDesc([FromServices] DataContext dataContext)
@@ -54,7 +54,7 @@ namespace testeef.Controllers
         /// </summary>
         /// <param name="context">Acessar os dados. o "[FromServices]" indica que vai utilizar o DataContext que já está em memória</param>
         /// <param name="id">Informe o Id da categoria desejado</param>
-        /// <returns></returns>
+        /// <returns>Retorna uma Categoria</returns>
         [HttpGet]
         [Route("{id:int}")]
         public async Task<ActionResult<Category>> GetById([FromServices] DataContext context, int id)
@@ -68,7 +68,7 @@ namespace testeef.Controllers
         /// </summary>
         /// <param name="context">Acessar os dados. o "[FromServices]" indica que vai utilizar o DataContext que já está em memória</param>
         /// <param name="id">Informe o Id da Categoria desejado.</param>
-        /// <returns></returns>
+        /// <returns>Retorna "Verdadeiro / Falso"</returns>
         [HttpGet]
         [Route("{id:int}")]
         private async Task<ActionResult<bool>> VerificaSeExiste([FromServices] DataContext context, int id)
@@ -77,7 +77,12 @@ namespace testeef.Controllers
             return existe;
         }
 
-        ////retorna o último inserido
+        ///// <summary>
+        ///// Retorna o último objeto inserido.
+        ///// </summary>
+        ///// <param name="context"></param>
+        ///// <param name="model"></param>
+        ///// <returns></returns>
         //[HttpPost]
         //[Route("")]
         //public async Task<ActionResult<Category>> PostRetornaUltimo(
@@ -98,7 +103,13 @@ namespace testeef.Controllers
         //    }
         //}
 
-        //retorna uma lista de todos em ordem decrescente.
+        /// <summary>
+        /// Grava na base uma nova Categoria.
+        /// E retorna toda a lista das Categorias já cadastradas.
+        /// </summary>
+        /// <param name="context">Representação do banco de dados em memória</param>
+        /// <param name="model">Modelo via json</param>
+        /// <returns>Retorna uma lista de todos.</returns>        
         [HttpPost]
         [Route("")]
         public async Task<ActionResult<List<Category>>> Post([FromServices] DataContext context, [FromBody] Category model)
@@ -117,6 +128,13 @@ namespace testeef.Controllers
             }
         }
 
+        /// <summary>
+        /// Altera os dados da Categoria atual
+        /// </summary>
+        /// <param name="context">Representação do banco de dados</param>
+        /// <param name="model">Dados a ser alterado no modelo json pelo body</param>
+        /// <param name="id">Informe o Id da Categoria desejada</param>
+        /// <returns>Retorna a categoria já alterada.</returns>
         [HttpPut("{id}")]
         [Route("alterar/{id:int}")]
         public async Task<ActionResult<Category>> Alterar([FromServices] DataContext context, [FromBody] Category model, int id)
@@ -155,7 +173,12 @@ namespace testeef.Controllers
             return retorno;
         }
 
-
+        /// <summary>
+        /// Deleta/Remove a Categoria repassando via "Rota" o id desejado para exclusão
+        /// </summary>
+        /// <param name="context">Representação do nosso banco de dados</param>
+        /// <param name="id">Informe o Id desejado para exclusão</param>
+        /// <returns>Não retorna nada.</returns>
         [HttpDelete("{id}")]
         [Route("deletar/{id:int}")]
         public async Task<IActionResult> Deletar([FromServices] DataContext context, int id)
