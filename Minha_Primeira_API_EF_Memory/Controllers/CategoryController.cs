@@ -12,6 +12,9 @@ namespace testeef.Controllers
     [Route("categorias")] //Como não definimos nenhuma rota no endPoints(Startup.cs), o mapeamento das rotas serão pela rotas do controller atual
     public class CategoryController : ControllerBase
     {
+        ///Metódo tradicional onde tinhamos a variável DataContext que era repassado no contrutor da classe.
+        ///Esta maneira deixou de ser usado na nova versão no .net core,
+        ///deixou o código mais simples
         //private DataContext _dataContext;   
 
         //public CategoryController(DataContext dataContext)
@@ -19,6 +22,11 @@ namespace testeef.Controllers
         //    _dataContext = dataContext;
         //}
 
+        /// <summary>
+        /// Retorna uma lista de Categorias, usando o Task de forma assíncrona. 
+        /// </summary>
+        /// <param name="dataContext">Acessar os dados. o "[FromServices]" indica que vai utilizar o DataContext que já está em memória</param>
+        /// <returns></returns>
         [HttpGet]//definindo o verbo utilizado. Se não colocar nada, por padrão ele assume o GET
         [Route("")]//rota vazia, ou seja, será a mesma rota definida no controller
         public async Task<ActionResult<List<Category>>> Get([FromServices] DataContext dataContext)
