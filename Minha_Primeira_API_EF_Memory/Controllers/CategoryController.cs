@@ -8,8 +8,8 @@ using testeef.Models;
 
 namespace testeef.Controllers
 {
-    [ApiController]
-    [Route("categorias")]
+    [ApiController] //definindo que usaremos o ApiController
+    [Route("categorias")] //Como não definimos nenhuma rota no endPoints(Startup.cs), o mapeamento das rotas serão pela rotas do controller atual
     public class CategoryController : ControllerBase
     {
         //private DataContext _dataContext;   
